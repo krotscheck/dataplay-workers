@@ -1,0 +1,16 @@
+language: java
+jdk:
+- openjdk7
+- oraclejdk7
+install: mvn install -DskipTests=true
+script: mvn clean install
+branches:
+  only:
+    - master
+    - develop
+    - /^feature\/.*$/
+    - /^hotfix\/.*$/
+    - /^release\/.*$/
+
+after_success:
+  - if [[ "$TRAVIS_BRANCH" != "master" ]]; then echo "Not building on master, no release needed. "; exit 0; fi

@@ -5,7 +5,7 @@
     <groupId>io.dataplay</groupId>
     <artifactId>dataplay-workers</artifactId>
     <version>0.1.3-SNAPSHOT</version>
-    <name>DataPlay Workers</name>
+    <name>dataplay.io workers</name>
     <description>
         A collection of small, highly atomic storm bolts and spouts.
     </description>
@@ -19,6 +19,39 @@
         </license>
     </licenses>
 
+    <organization>
+        <name>dataplay.io</name>
+        <url>https://datplay.io</url>
+    </organization>
+
+    <ciManagement>
+        <system>travis</system>
+        <url>https://travis-ci.org/krotscheck/dataplay-workers</url>
+    </ciManagement>
+
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/krotscheck/dataplay-workers/issues</url>
+    </issueManagement>
+
+    <developers>
+        <developer>
+            <id>krotscheck</id>
+            <name>Michael Krotscheck</name>
+            <email>krotscheck@gmail.com</email>
+            <url>https://www.krotscheck.net</url>
+            <organization>dataplay.io</organization>
+            <organizationUrl>http://dataplay.io</organizationUrl>
+            <roles>
+                <role>owner</role>
+            </roles>
+            <timezone>-8</timezone>
+            <properties>
+                <picUrl>http://www.gravatar.com/avatar/7be4c8b3919835b3d0c256fc3b3e9c55.png</picUrl>
+            </properties>
+        </developer>
+    </developers>
+
     <properties>
         <jdk.version>1.7</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,19 +61,15 @@
     <scm>
         <developerConnection>scm:git:git@github.com:krotscheck/dataplay-workers.git</developerConnection>
         <connection>scm:git:git@github.com:krotscheck/dataplay-workers.git</connection>
-        <url>https://krotscheck.github.com/dataplay-workers</url>
+        <url>https://github.com/krotscheck/dataplay-workers</url>
         <tag>HEAD</tag>
     </scm>
 
     <distributionManagement>
         <repository>
             <id>repo</id>
-            <url>https://github.com/krotscheck/dataplay-workers/raw/master/releases</url>
+            <url>https://krotscheck.github.com/dataplay-workers/repo</url>
         </repository>
-        <snapshotRepository>
-            <id>snapshot-repo</id>
-            <url>https://github.com/krotscheck/dataplay-workers/raw/master/snapshots</url>
-        </snapshotRepository>
     </distributionManagement>
 
     <build>

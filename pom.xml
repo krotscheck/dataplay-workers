@@ -4,7 +4,7 @@
 
     <groupId>io.dataplay</groupId>
     <artifactId>dataplay-workers</artifactId>
-    <version>0.1.1</version>
+    <version>0.1.2</version>
     <name>DataPlay Workers</name>
     <description>
         A collection of small, highly atomic storm bolts and spouts.
@@ -110,7 +110,6 @@
                             <versionTagPrefix>v</versionTagPrefix>
                         </flowInitContext>
                         <noDeploy>true</noDeploy>
-                        <pushReleases>true</pushReleases>
                         <tagMessage>Tagging release ${project.version}</tagMessage>
                     </configuration>
                 </plugin>

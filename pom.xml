@@ -109,6 +109,9 @@
                             <hotfixBranchPrefix>hotfix/</hotfixBranchPrefix>
                             <versionTagPrefix>v</versionTagPrefix>
                         </flowInitContext>
+                        <noDeploy>true</noDeploy>
+                        <pushReleases>true</pushReleases>
+                        <tagMessage>Tagging release ${project.version}</tagMessage>
                     </configuration>
                 </plugin>
 

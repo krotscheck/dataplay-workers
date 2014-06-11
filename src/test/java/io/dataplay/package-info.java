@@ -15,13 +15,10 @@
  * limitations under the License.
  */
 
-package io.dataplay;
-
 /**
- * A marker interface to distinguish integration tests in our suite.
+ * Unit and integration tests for the library.
  *
  * @author Michael Krotscheck
  */
-public interface IntegrationTest {
 
-}
+package io.dataplay;

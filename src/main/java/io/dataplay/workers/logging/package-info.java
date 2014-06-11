@@ -15,13 +15,12 @@
  * limitations under the License.
  */
 
-package io.dataplay;
-
 /**
- * A marker interface to distinguish integration tests in our suite.
+ * This package contains all classes necessary for the logging bolt,
+ * a simple implementation of a bolt which only logs the contents of tuples
+ * that it receives.
  *
  * @author Michael Krotscheck
  */
-public interface IntegrationTest {
 
-}
+package io.dataplay.workers.logging;

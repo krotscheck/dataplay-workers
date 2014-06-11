@@ -1,7 +1,6 @@
 language: java
 jdk:
 - openjdk7
-- oraclejdk7
 install: mvn install -DskipTests=true
 script: mvn clean install
 branches:
@@ -13,7 +12,10 @@ branches:
   - /^release\/.*$/
 after_success:
   - if [[ "$TRAVIS_BRANCH" != "master" ]]; then echo "Not building on master, no release needed. "; exit 0; fi
-  - mvn site site-deploy
+  - mvn deploy site site-deploy
 env:
   global:
     secure: slClAnD5IkFq+l2Up1DpnFhxS6R6fHuwInY8ZAHx8NE8B5UDVCjZnEzfeFbAMHlGLAeMmoOY69m6JQF98NZvbPtCYAoFnyczkxGox2Uehtl9HlflM5c5cKknprEUNuyxLgm2mo7WvjPJETabiUrx2TVnw4rq9mOoWgaflZuu/eo=
+cache:
+  directories:
+    - $HOME/.m2

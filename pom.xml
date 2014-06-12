@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.dataplay</groupId>
-    <artifactId>dataplay-workers</artifactId>
+    <groupId>io.dataplay.storm</groupId>
+    <artifactId>workers</artifactId>
     <version>0.1.5-SNAPSHOT</version>
-    <name>dataplay.io workers</name>
+    <name>Dataplay.io Storm Libraries</name>
     <description>
-        A collection of small, highly atomic storm bolts and spouts.
+        This jar contains the aggregate storm utilities, bolts, and spouts for
+        the dataplay.io DAAS platform.
     </description>
     <url>https://github.com/krotscheck/dataplay-workers</url>
 
     <packaging>jar</packaging>
+
     <licenses>
         <license>
-            <name>Apache 2.0</name>
+            <name>Apache License, Version 2.0</name>
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
         </license>
     </licenses>
 
     <organization>
         <name>dataplay.io</name>
-        <url>https://datplay.io</url>
+        <url>https://dataplay.io</url>
     </organization>
 
     <ciManagement>
@@ -66,9 +71,12 @@
         <developerConnection>
             scm:git:git@github.com:krotscheck/dataplay-workers.git
         </developerConnection>
-        <connection>scm:git:git@github.com:krotscheck/dataplay-workers.git
+        <connection>
+            scm:git:git@github.com:krotscheck/dataplay-workers.git
         </connection>
-        <url>https://github.com/krotscheck/dataplay-workers</url>
+        <url>
+            https://github.com/krotscheck/dataplay-workers
+        </url>
         <tag>HEAD</tag>
     </scm>
 
@@ -115,13 +123,10 @@
                         <goals>
                             <goal>site</goal>
                         </goals>
-                        <!-- select the Maven phase in which the plugin will be executed -->
                         <phase>site-deploy</phase>
                         <configuration>
                             <server>github</server>
-                            <message>Site:
-                                ${project.groupId}:${project.artifactId}:${project.version}
-                            </message>
+                            <message>Site: ${project.groupId}:${project.artifactId}:${project.version}</message>
                             <merge>true</merge>
                             <oauth2Token>${env.TOKEN}</oauth2Token>
                         </configuration>
@@ -177,8 +182,8 @@
                     <version>2.16</version>
                     <configuration>
                         <argLine>-XX:-UseSplitVerifier</argLine>
-                        <groups>io.dataplay.UnitTest</groups>
-                        <excludedGroups>io.dataplay.IntegrationTest
+                        <groups>io.dataplay.test.UnitTest</groups>
+                        <excludedGroups>io.dataplay.test.IntegrationTest
                         </excludedGroups>
                     </configuration>
                     <dependencies>
@@ -196,8 +201,8 @@
                                 <goal>test</goal>
                             </goals>
                             <configuration>
-                                <groups>io.dataplay.IntegrationTest</groups>
-                                <excludedGroups>io.dataplay.UnitTest
+                                <groups>io.dataplay.test.IntegrationTest</groups>
+                                <excludedGroups>io.dataplay.test.UnitTest
                                 </excludedGroups>
                             </configuration>
                         </execution>

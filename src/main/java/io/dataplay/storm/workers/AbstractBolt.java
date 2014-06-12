@@ -15,11 +15,10 @@
  * limitations under the License.
  */
 
-package io.dataplay.workers;
+package io.dataplay.storm.workers;
 
-import io.dataplay.IDataWorker;
 import io.dataplay.storm.Stream;
-import io.dataplay.util.StormUtil;
+import io.dataplay.storm.util.StormUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;

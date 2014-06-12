@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package io.dataplay;
+package io.dataplay.storm.workers;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

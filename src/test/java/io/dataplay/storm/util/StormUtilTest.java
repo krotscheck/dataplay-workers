@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-package io.dataplay.util;
+package io.dataplay.storm.util;
 
-import io.dataplay.UnitTest;
+import io.dataplay.test.UnitTest;
 import io.dataplay.storm.TopologyCommand;
 import io.dataplay.test.TupleUtil;
 import org.junit.Assert;

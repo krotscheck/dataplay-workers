@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-package io.dataplay.workers.logging;
+package io.dataplay.storm.workers.logging;
 
-import io.dataplay.workers.AbstractBolt;
+import io.dataplay.storm.workers.AbstractBolt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

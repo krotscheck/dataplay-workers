@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package io.dataplay.util;
+package io.dataplay.storm.util;
 
 import io.dataplay.storm.Stream;
 import io.dataplay.storm.TopologyCommand;

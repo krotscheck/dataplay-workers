@@ -16,9 +16,10 @@
  */
 
 /**
- * Unit tests for io.dataplay.workers.logging.*.
+ * This package contains utility classes and other methods useful across the
+ * entire project.
  *
  * @author Michael Krotscheck
  */
 
-package io.dataplay.workers.logging;
+package io.dataplay.storm.util;

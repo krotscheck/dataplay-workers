@@ -4,7 +4,7 @@
 
     <groupId>io.dataplay</groupId>
     <artifactId>dataplay-workers</artifactId>
-    <version>0.1.4</version>
+    <version>0.1.5-SNAPSHOT</version>
     <name>dataplay.io workers</name>
     <description>
         A collection of small, highly atomic storm bolts and spouts.

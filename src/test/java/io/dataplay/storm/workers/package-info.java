@@ -16,12 +16,9 @@
  */
 
 /**
- * This is the base package in which all of our storm spouts and bolts live.
- * within each namespace you should be able to find the implementation of
- * each particular spout/bolt, though we recommend you access them via the
- * worker registry instead.
+ * Unit tests for io.dataplay.worker.*.
  *
  * @author Michael Krotscheck
  */
 
-package io.dataplay.workers;
+package io.dataplay.storm.workers;

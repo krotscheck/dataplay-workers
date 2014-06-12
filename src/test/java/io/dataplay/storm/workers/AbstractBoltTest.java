@@ -15,10 +15,9 @@
  * limitations under the License.
  */
 
-package io.dataplay.workers;
+package io.dataplay.storm.workers;
 
-import io.dataplay.IDataWorker;
-import io.dataplay.UnitTest;
+import io.dataplay.test.UnitTest;
 import io.dataplay.storm.Stream;
 import io.dataplay.storm.TopologyCommand;
 import io.dataplay.test.TupleUtil;

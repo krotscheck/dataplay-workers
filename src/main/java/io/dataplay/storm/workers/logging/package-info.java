@@ -16,9 +16,11 @@
  */
 
 /**
- * Unit and integration tests for the library.
+ * This package contains all classes necessary for the logging bolt,
+ * a simple implementation of a bolt which only logs the contents of tuples
+ * that it receives.
  *
  * @author Michael Krotscheck
  */
 
-package io.dataplay;
+package io.dataplay.storm.workers.logging;

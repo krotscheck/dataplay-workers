@@ -15,13 +15,10 @@
  * limitations under the License.
  */
 
-package io.dataplay;
-
 /**
- * A marker interface to distinguish unit tests in our suite.
+ * Unit tests for io.dataplay.storm.workers.logging.*.
  *
  * @author Michael Krotscheck
  */
-public interface UnitTest {
 
-}
+package io.dataplay.storm.workers.logging;

@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-package io.dataplay.workers.logging;
+package io.dataplay.storm.workers.logging;
 
-import io.dataplay.UnitTest;
+import io.dataplay.test.UnitTest;
 import io.dataplay.test.TupleUtil;
 import org.junit.Assert;
 import org.junit.Test;

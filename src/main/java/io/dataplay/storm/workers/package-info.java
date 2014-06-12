@@ -16,13 +16,12 @@
  */
 
 /**
- * This package contains a library of storm bolts and workers that are
- * designed to be centrally managed via a common coordination plane. By
- * implementing a management layer inside the topology itself,
- * we gain the ability to create short lived topologies that process finite
- * amounts of tuples.
+ * This is the base package in which all of our storm spouts and bolts live.
+ * within each namespace you should be able to find the implementation of
+ * each particular spout/bolt, though we recommend you access them via the
+ * worker registry instead.
  *
  * @author Michael Krotscheck
  */
 
-package io.dataplay;
+package io.dataplay.storm.workers;

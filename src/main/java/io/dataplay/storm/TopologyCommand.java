@@ -15,13 +15,27 @@
  * limitations under the License.
  */
 
-package io.dataplay;
+package io.dataplay.storm;
 
 /**
- * A marker interface to distinguish integration tests in our suite.
+ * A collection of commands that may be issued to the bolt management stream.
  *
  * @author Michael Krotscheck
  */
-public interface IntegrationTest {
+public final class TopologyCommand {
 
+    /**
+     * Private constructor.
+     */
+    private TopologyCommand() {
+    }
+
+    /**
+     * This command tells the bolt to clean up and shut down. It is issued as a
+     * courtesy to the bolt, so that it can close any outgoing connections it
+     * has to other systems. Since regular topologies tend to assume continuous
+     * operation, this is only necessary in situations where the tuple stream is
+     * finite.
+     */
+    public static final String SHUTDOWN = "shutdown";
 }

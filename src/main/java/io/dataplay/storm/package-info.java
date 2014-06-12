@@ -15,13 +15,11 @@
  * limitations under the License.
  */
 
-package io.dataplay;
-
 /**
- * A marker interface to distinguish integration tests in our suite.
+ * Tools required for the coordination of storm spouts, bolts, topologies,
+ * and clusters.
  *
  * @author Michael Krotscheck
  */
-public interface IntegrationTest {
 
-}
+package io.dataplay.storm;

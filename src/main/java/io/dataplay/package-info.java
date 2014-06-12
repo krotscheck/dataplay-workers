@@ -15,13 +15,14 @@
  * limitations under the License.
  */
 
-package io.dataplay;
-
 /**
- * A marker interface to distinguish integration tests in our suite.
+ * This package contains a library of storm bolts and workers that are
+ * designed to be centrally managed via a common coordination plane. By
+ * implementing a management layer inside the topology itself,
+ * we gain the ability to create short lived topologies that process finite
+ * amounts of tuples.
  *
  * @author Michael Krotscheck
  */
-public interface IntegrationTest {
 
-}
+package io.dataplay;

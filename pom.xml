@@ -4,8 +4,8 @@
 
     <groupId>io.dataplay</groupId>
     <artifactId>dataplay-workers</artifactId>
-    <version>0.1.2</version>
-    <name>DataPlay Workers</name>
+    <version>0.1.3</version>
+    <name>dataplay.io workers</name>
     <description>
         A collection of small, highly atomic storm bolts and spouts.
     </description>
@@ -19,28 +19,64 @@
         </license>
     </licenses>
 
+    <organization>
+        <name>dataplay.io</name>
+        <url>https://datplay.io</url>
+    </organization>
+
+    <ciManagement>
+        <system>travis</system>
+        <url>https://travis-ci.org/krotscheck/dataplay-workers</url>
+    </ciManagement>
+
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/krotscheck/dataplay-workers/issues</url>
+    </issueManagement>
+
+    <developers>
+        <developer>
+            <id>krotscheck</id>
+            <name>Michael Krotscheck</name>
+            <email>krotscheck@gmail.com</email>
+            <url>https://www.krotscheck.net</url>
+            <organization>dataplay.io</organization>
+            <organizationUrl>http://dataplay.io</organizationUrl>
+            <roles>
+                <role>owner</role>
+            </roles>
+            <timezone>-8</timezone>
+            <properties>
+                <picUrl>
+                    http://www.gravatar.com/avatar/7be4c8b3919835b3d0c256fc3b3e9c55.png
+                </picUrl>
+            </properties>
+        </developer>
+    </developers>
+
     <properties>
         <jdk.version>1.7</jdk.version>
+        <jackson.version>2.3.2</jackson.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.reporting.outputEncoding>UTF-8
+        </project.reporting.outputEncoding>
     </properties>
 
     <scm>
-        <developerConnection>scm:git:git@github.com:krotscheck/dataplay-workers.git</developerConnection>
-        <connection>scm:git:git@github.com:krotscheck/dataplay-workers.git</connection>
-        <url>https://krotscheck.github.com/dataplay-workers</url>
+        <developerConnection>
+            scm:git:git@github.com:krotscheck/dataplay-workers.git
+        </developerConnection>
+        <connection>scm:git:git@github.com:krotscheck/dataplay-workers.git
+        </connection>
+        <url>https://github.com/krotscheck/dataplay-workers</url>
         <tag>HEAD</tag>
     </scm>
 
     <distributionManagement>
         <repository>
             <id>repo</id>
-            <url>https://github.com/krotscheck/dataplay-workers/raw/master/releases</url>
+            <url>https://krotscheck.github.com/dataplay-workers/repo</url>
         </repository>
-        <snapshotRepository>
-            <id>snapshot-repo</id>
-            <url>https://github.com/krotscheck/dataplay-workers/raw/master/snapshots</url>
-        </snapshotRepository>
     </distributionManagement>
 
     <build>
@@ -83,10 +119,24 @@
                         <phase>site-deploy</phase>
                         <configuration>
                             <server>github</server>
-                            <message>Site: ${project.groupId}:${project.artifactId}:${project.version}</message>
+                            <message>Site:
+                                ${project.groupId}:${project.artifactId}:${project.version}
+                            </message>
                             <merge>true</merge>
                             <oauth2Token>${env.TOKEN}</oauth2Token>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>clean</goal>
+                            <goal>check</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
@@ -94,6 +144,10 @@
 
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                </plugin>
 
                 <!-- JGitFlow -->
                 <plugin>
@@ -110,7 +164,8 @@
                             <versionTagPrefix>v</versionTagPrefix>
                         </flowInitContext>
                         <noDeploy>true</noDeploy>
-                        <tagMessage>Tagging release ${project.version}</tagMessage>
+                        <tagMessage>Tagging release ${project.version}
+                        </tagMessage>
                     </configuration>
                 </plugin>
 
@@ -122,7 +177,8 @@
                     <configuration>
                         <argLine>-XX:-UseSplitVerifier</argLine>
                         <groups>io.dataplay.UnitTest</groups>
-                        <excludedGroups>io.dataplay.IntegrationTest</excludedGroups>
+                        <excludedGroups>io.dataplay.IntegrationTest
+                        </excludedGroups>
                     </configuration>
                     <dependencies>
                         <dependency>
@@ -140,7 +196,8 @@
                             </goals>
                             <configuration>
                                 <groups>io.dataplay.IntegrationTest</groups>
-                                <excludedGroups>io.dataplay.UnitTest</excludedGroups>
+                                <excludedGroups>io.dataplay.UnitTest
+                                </excludedGroups>
                             </configuration>
                         </execution>
                     </executions>
@@ -153,8 +210,10 @@
                     <configuration>
                         <archive>
                             <manifest>
-                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                                <addDefaultImplementationEntries>true
+                                </addDefaultImplementationEntries>
+                                <addDefaultSpecificationEntries>true
+                                </addDefaultSpecificationEntries>
                             </manifest>
                         </archive>
                     </configuration>
@@ -209,8 +268,23 @@
                     <version>2.8</version>
                 </plugin>
                 <plugin>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <version>2.2.1</version>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>cobertura-maven-plugin</artifactId>
+                    <version>2.6</version>
+                    <configuration>
+                        <check>
+                            <branchRate>85</branchRate>
+                            <lineRate>85</lineRate>
+                            <haltOnFailure>true</haltOnFailure>
+                            <totalBranchRate>85</totalBranchRate>
+                            <totalLineRate>85</totalLineRate>
+                            <packageLineRate>85</packageLineRate>
+                            <packageBranchRate>85</packageBranchRate>
+                        </check>
+                        <formats>
+                            <format>xml</format>
+                        </formats>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -241,6 +315,11 @@
                 <version>2.7</version>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>2.3</version>
+            </plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
                 <version>2.5.4</version>
@@ -255,6 +334,7 @@
                 <version>2.12.1</version>
                 <configuration>
                     <configLocation>checkstyle.xml</configLocation>
+                    <failsOnError>true</failsOnError>
                 </configuration>
             </plugin>
             <plugin>
@@ -265,12 +345,11 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.6</version>
-                <configuration>
-                    <formats>
-                        <format>xml</format>
-                    </formats>
-                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
             </plugin>
         </plugins>
     </reporting>
@@ -300,6 +379,12 @@
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.5</version>
+            <scope>test</scope>
+        </dependency>
 
         <!-- Storm -->
         <dependency>
@@ -307,6 +392,23 @@
             <artifactId>storm</artifactId>
             <version>0.9.0.1</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- Jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-csv</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
 
     </dependencies>

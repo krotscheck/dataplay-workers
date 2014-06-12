@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BugCollection version='2.0.3' threshold='medium' effort='min'><Error></Error><Project><SrcDir>/home/travis/build/krotscheck/dataplay-workers/src/main/java</SrcDir><SrcDir>/home/travis/build/krotscheck/dataplay-workers/src/test/java</SrcDir></Project></BugCollection>

@@ -17,8 +17,8 @@
 
 package io.dataplay.storm.workers.logging;
 
-import io.dataplay.test.UnitTest;
 import io.dataplay.test.TupleUtil;
+import io.dataplay.test.UnitTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -31,6 +31,7 @@ import java.util.Map;
 
 import backtype.storm.task.OutputCollector;
 import backtype.storm.task.TopologyContext;
+import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 
 import static org.mockito.Mockito.mock;
@@ -49,24 +50,27 @@ public final class LoggingBoltTest {
     public void testCalculateSchema() {
         LoggingBolt bolt = new LoggingBolt();
 
-        Map<String, String> schema1 = new HashMap<>();
-        schema1.put("one", "string");
-        schema1.put("two", "string");
+        List<String> schema1 = new ArrayList<>();
+        schema1.add("one");
+        schema1.add("two");
+        Fields fields1 = new Fields(schema1);
 
-        Map<String, String> schema2 = new HashMap<>();
-        schema2.put("three", "string");
-        schema2.put("four", "string");
+        List<String> schema2 = new ArrayList<>();
+        schema2.add("three");
+        schema2.add("four");
+        Fields fields2 = new Fields(schema2);
 
-        List<Map<String, String>> schemaList = new ArrayList<>();
-        schemaList.add(schema1);
-        schemaList.add(schema2);
+        List<Fields> fieldsList = new ArrayList<>();
+        fieldsList.add(fields1);
+        fieldsList.add(fields2);
 
-        Map<String, String> calculatedSchema = bolt.calculateSchema(schemaList);
+        bolt.calculateFields(fieldsList);
+        Fields result = bolt.getFields();
 
-        Assert.assertTrue(calculatedSchema.entrySet()
-                .containsAll(schema1.entrySet()));
-        Assert.assertTrue(calculatedSchema.entrySet()
-                .containsAll(schema2.entrySet()));
+        Assert.assertEquals("one", result.get(0));
+        Assert.assertEquals("two", result.get(1));
+        Assert.assertEquals("three", result.get(2));
+        Assert.assertEquals("four", result.get(3));
     }
 
     /**

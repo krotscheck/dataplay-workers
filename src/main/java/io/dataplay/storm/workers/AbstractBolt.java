@@ -22,10 +22,8 @@ import io.dataplay.storm.util.StormUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import backtype.storm.task.OutputCollector;
 import backtype.storm.task.TopologyContext;
@@ -47,7 +45,7 @@ public abstract class AbstractBolt extends BaseRichBolt implements IDataWorker {
     /**
      * Our schema.
      */
-    private Map<String, String> schema;
+    private Fields schema;
 
     /**
      * The output collector.
@@ -112,19 +110,21 @@ public abstract class AbstractBolt extends BaseRichBolt implements IDataWorker {
     /**
      * Return the data schema for this spout.
      *
-     * @return The schema for this bolt.
+     * @return The fields for this bolt.
      */
-    public final Map<String, String> getSchema() {
+    @Override
+    public final Fields getFields() {
         return schema;
     }
 
     /**
      * Set the data schema for this spout.
      *
-     * @param newSchema Set the new schema for this bolt.
+     * @param newFields Set the new schema for this bolt.
      */
-    public final void setSchema(final Map<String, String> newSchema) {
-        this.schema = newSchema;
+    @Override
+    public final void setFields(final Fields newFields) {
+        this.schema = newFields;
     }
 
     /**
@@ -138,13 +138,9 @@ public abstract class AbstractBolt extends BaseRichBolt implements IDataWorker {
     public final void declareOutputFields(final OutputFieldsDeclarer
                                                   outputFieldsDeclarer) {
         // Declare the default stream with our configured schema
-        Map<String, String> currentSchema = getSchema();
-        List<String> fields = new ArrayList<>();
-        fields.addAll(currentSchema.keySet());
         outputFieldsDeclarer.declareStream(
                 Utils.DEFAULT_STREAM_ID,
-                new Fields(fields)
-        );
+                getFields());
 
         // Declare the bolt status stream.
         outputFieldsDeclarer.declareStream(
@@ -237,57 +233,54 @@ public abstract class AbstractBolt extends BaseRichBolt implements IDataWorker {
 
     /**
      * Calculate the data schema for this bolt.
-     *
-     * @return The schema.
      */
     @Override
-    public final Map<String, String> calculateSchema() {
+    public final void calculateFields() {
         // Bolts must have a parent schema.
-        return calculateSchema(new ArrayList<Map<String, String>>());
+        calculateFields(new ArrayList<Fields>());
     }
 
     /**
      * Calculate the data schema for this bolt, given a single parent schema.
      *
      * @param parentSchema The parent schema.
-     * @return The bolt's schema.
      */
     @Override
-    public final Map<String, String> calculateSchema(final Map<String,
-            String> parentSchema) {
-        List<Map<String, String>> parentSchemae = new ArrayList<>();
+    public final void calculateFields(final Fields parentSchema) {
+        List<Fields> parentSchemae = new ArrayList<>();
         parentSchemae.add(parentSchema);
-        return calculateSchema(parentSchemae);
+        calculateFields(parentSchemae);
     }
 
     /**
      * Calculate the data schema for this bolt, given several parent schema.
      *
      * @param parentSchema A list of parent schema.
-     * @return The bolt's schema.
      */
     @Override
-    public abstract Map<String, String> calculateSchema(final List<Map<String,
-            String>> parentSchema);
+    public abstract void calculateFields(final List<Fields> parentSchema);
 
     /**
      * Helper method that calculates the schema for this bolt by simply merging
      * the provided parent schema.
      *
-     * @param mergeSchema A list of schema to merge.
+     * @param mergeFields A list of schema to merge.
      * @return A merged schema.
      */
-    protected final Map<String, String> mergeSchema(
-            final List<Map<String, String>> mergeSchema) {
-        Map<String, String> finalSchema = new HashMap<>();
+    protected final Fields mergeFields(
+            final List<Fields> mergeFields) {
 
-        for (Map<String, String> schemaItem : mergeSchema) {
-            for (Entry<String, String> entry : schemaItem.entrySet()) {
-                finalSchema.put(entry.getKey(), entry.getValue());
+        List<String> finalSchema = new ArrayList<>();
+
+        for (Fields fields : mergeFields) {
+            for (String field : fields) {
+                if (!finalSchema.contains(field)) {
+                    finalSchema.add(field);
+                }
             }
         }
 
-        return finalSchema;
+        return new Fields(finalSchema);
     }
 
     /**

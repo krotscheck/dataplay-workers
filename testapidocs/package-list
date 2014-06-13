@@ -1,6 +1,6 @@
-io.dataplay
 io.dataplay.storm
+io.dataplay.storm.util
+io.dataplay.storm.workers
+io.dataplay.storm.workers.logging
+io.dataplay.storm.workers.merge
 io.dataplay.test
-io.dataplay.util
-io.dataplay.workers
-io.dataplay.workers.logging

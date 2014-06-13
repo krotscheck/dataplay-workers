@@ -19,13 +19,13 @@ under the License.
 -->
 <rss version="0.91">
   <channel>
-    <title>dataplay.io workers - Checkstyle report</title>
+    <title>Dataplay.io Storm Libraries - Checkstyle report</title>
     <link>https://github.com/krotscheck/dataplay-workers</link>
-    <description>dataplay.io workers - Checkstyle report</description>
+    <description>Dataplay.io Storm Libraries - Checkstyle report</description>
     <language>en-us</language>
     <copyright>&#169;2014 dataplay.io</copyright>
     <item>
-      <title>File: 11,
+      <title>File: 12,
              Errors: 0,
              Warnings: 0,
              Infos: 0
@@ -46,35 +46,35 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="https://github.com/krotscheck/dataplay-workers/checkstyle.html#io.dataplay.package-info.java">io/dataplay/package-info.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/krotscheck/dataplay-workers/checkstyle.html#io.dataplay.workers.AbstractBolt.java">io/dataplay/workers/AbstractBolt.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="https://github.com/krotscheck/dataplay-workers/checkstyle.html#io.dataplay.storm.package-info.java">io/dataplay/storm/package-info.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/krotscheck/dataplay-workers/checkstyle.html#io.dataplay.storm.workers.AbstractBolt.java">io/dataplay/storm/workers/AbstractBolt.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/krotscheck/dataplay-workers/checkstyle.html#io.dataplay.storm.workers.merge.MergeBolt.java">io/dataplay/storm/workers/merge/MergeBolt.java</a>
                 </td>
                 <td>
                   0
@@ -102,7 +102,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/krotscheck/dataplay-workers/checkstyle.html#io.dataplay.util.package-info.java">io/dataplay/util/package-info.java</a>
+                  <a href="https://github.com/krotscheck/dataplay-workers/checkstyle.html#io.dataplay.storm.util.package-info.java">io/dataplay/storm/util/package-info.java</a>
                 </td>
                 <td>
                   0
@@ -116,7 +116,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/krotscheck/dataplay-workers/checkstyle.html#io.dataplay.workers.logging.LoggingBolt.java">io/dataplay/workers/logging/LoggingBolt.java</a>
+                  <a href="https://github.com/krotscheck/dataplay-workers/checkstyle.html#io.dataplay.storm.workers.package-info.java">io/dataplay/storm/workers/package-info.java</a>
                 </td>
                 <td>
                   0
@@ -130,7 +130,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/krotscheck/dataplay-workers/checkstyle.html#io.dataplay.workers.logging.package-info.java">io/dataplay/workers/logging/package-info.java</a>
+                  <a href="https://github.com/krotscheck/dataplay-workers/checkstyle.html#io.dataplay.storm.workers.logging.LoggingBolt.java">io/dataplay/storm/workers/logging/LoggingBolt.java</a>
                 </td>
                 <td>
                   0
@@ -144,7 +144,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/krotscheck/dataplay-workers/checkstyle.html#io.dataplay.util.StormUtil.java">io/dataplay/util/StormUtil.java</a>
+                  <a href="https://github.com/krotscheck/dataplay-workers/checkstyle.html#io.dataplay.storm.util.StormUtil.java">io/dataplay/storm/util/StormUtil.java</a>
                 </td>
                 <td>
                   0
@@ -158,7 +158,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/krotscheck/dataplay-workers/checkstyle.html#io.dataplay.IDataWorker.java">io/dataplay/IDataWorker.java</a>
+                  <a href="https://github.com/krotscheck/dataplay-workers/checkstyle.html#io.dataplay.storm.workers.merge.package-info.java">io/dataplay/storm/workers/merge/package-info.java</a>
                 </td>
                 <td>
                   0
@@ -186,7 +186,21 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/krotscheck/dataplay-workers/checkstyle.html#io.dataplay.workers.package-info.java">io/dataplay/workers/package-info.java</a>
+                  <a href="https://github.com/krotscheck/dataplay-workers/checkstyle.html#io.dataplay.storm.workers.IDataWorker.java">io/dataplay/storm/workers/IDataWorker.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/krotscheck/dataplay-workers/checkstyle.html#io.dataplay.storm.workers.logging.package-info.java">io/dataplay/storm/workers/logging/package-info.java</a>
                 </td>
                 <td>
                   0

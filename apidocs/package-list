@@ -1,5 +1,5 @@
-io.dataplay
 io.dataplay.storm
-io.dataplay.util
-io.dataplay.workers
-io.dataplay.workers.logging
+io.dataplay.storm.util
+io.dataplay.storm.workers
+io.dataplay.storm.workers.logging
+io.dataplay.storm.workers.merge

@@ -21,6 +21,7 @@ import io.dataplay.storm.Stream;
 import org.apache.commons.lang.RandomStringUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import backtype.storm.Constants;
@@ -71,7 +72,7 @@ public final class TupleUtil {
      * Create a mock tuple for a given component, stream, with data and fields.
      *
      * @param componentId The Component ID.
-     * @param streamId    The Stream ID
+     * @param streamId    The Stream ID.
      * @param fields      Fields.
      * @param data        The data to include in the tuple.
      * @return A new tuple.
@@ -88,8 +89,15 @@ public final class TupleUtil {
 
         int fieldCount = fields.size();
         for (int i = 0; i < fieldCount; i++) {
+            when(tuple.getValue(i)).thenReturn(data.get(i));
             when(tuple.getString(i)).thenReturn(data.get(i).toString());
         }
+
+        for (String field : fields) {
+            int idx = fields.fieldIndex(field);
+            when(tuple.getValueByField(field)).thenReturn(data.get(idx));
+        }
+
         return tuple;
     }
 
@@ -112,6 +120,40 @@ public final class TupleUtil {
                 Utils.DEFAULT_STREAM_ID,
                 new Fields(fieldData),
                 valueData);
+    }
+
+    /**
+     * Generate a generic tuple with specific data.
+     *
+     * @param fields Fields.
+     * @param data   The data to include in the tuple.
+     * @return A mock data tuple with random data.
+     */
+    public static Tuple mockDataTuple(final List<String> fields,
+                                      final List<Object> data) {
+        return mockTuple(Constants.SYSTEM_EXECUTOR_ID.toString(),
+                Utils.DEFAULT_STREAM_ID,
+                new Fields(fields),
+                data);
+    }
+
+    /**
+     * Generate a generic tuple with specific data.
+     *
+     * @param fields Fields.
+     * @param data   The data to include in the tuple.
+     * @return A mock data tuple with random data.
+     */
+    public static Tuple mockDataTuple(final String[] fields,
+                                      final Object[] data) {
+
+        List<String> fieldList = Arrays.asList(fields);
+        List<Object> dataList = Arrays.asList(data);
+
+        return mockTuple(Constants.SYSTEM_EXECUTOR_ID.toString(),
+                Utils.DEFAULT_STREAM_ID,
+                new Fields(fieldList),
+                dataList);
     }
 
     /**

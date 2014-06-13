@@ -17,10 +17,10 @@
 
 package io.dataplay.storm.workers;
 
-import io.dataplay.test.UnitTest;
 import io.dataplay.storm.Stream;
 import io.dataplay.storm.TopologyCommand;
 import io.dataplay.test.TupleUtil;
+import io.dataplay.test.UnitTest;
 import org.apache.commons.lang.ArrayUtils;
 import org.junit.After;
 import org.junit.Assert;
@@ -82,18 +82,20 @@ public final class AbstractBoltTest {
     }
 
     /**
-     * Test the schema getter/setter.
+     * Test the fields getter/setter.
      */
     @Test
-    public void testGetSetSchema() {
+    public void testGetSetFields() {
         AbstractBolt bolt = mock(AbstractBolt.class,
                 Mockito.CALLS_REAL_METHODS);
 
-        Map<String, String> schema = new HashMap<>();
+        Fields fields = new Fields();
 
-        bolt.setSchema(schema);
+        Assert.assertNull(bolt.getFields());
 
-        Assert.assertEquals(schema, bolt.getSchema());
+        bolt.setFields(fields);
+
+        Assert.assertEquals(fields, bolt.getFields());
     }
 
     /**
@@ -104,25 +106,20 @@ public final class AbstractBoltTest {
         AbstractBolt bolt = mock(AbstractBolt.class,
                 Mockito.CALLS_REAL_METHODS);
         OutputFieldsDeclarer declarer = mock(OutputFieldsDeclarer.class);
-        ArgumentCaptor<Fields> captor = ArgumentCaptor.forClass(Fields.class);
 
-        Map<String, String> schema = new HashMap<>();
-        schema.put("one", "string");
-        schema.put("two", "string");
-        bolt.setSchema(schema);
+        List<String> fieldsList = new ArrayList<>();
+        fieldsList.add("one");
+        fieldsList.add("two");
+        Fields fields = new Fields(fieldsList);
 
+        bolt.setFields(fields);
         bolt.declareOutputFields(declarer);
 
         // Assert that the correct fields were declared.
         verify(declarer).declareStream(
                 eq(Utils.DEFAULT_STREAM_ID),
-                captor.capture()
+                eq(fields)
         );
-
-        Fields f = captor.getValue();
-        for (String key : schema.keySet()) {
-            Assert.assertTrue(f.contains(key));
-        }
 
         // Assert that the correct streams were declared.
         verify(declarer).declareStream(
@@ -292,21 +289,21 @@ public final class AbstractBoltTest {
     }
 
     /**
-     * Test basic calculate schema method.
+     * Test basic calculate fields method.
      */
     @Test
     @SuppressWarnings("unchecked")
-    public void testCalculateSchema() {
+    public void testCalculateFields() {
         AbstractBolt bolt = mock(AbstractBolt.class);
 
         // Get our capture mechanism ready
         ArgumentCaptor<List> captor = ArgumentCaptor.forClass(List.class);
 
         // Prepare the bolt
-        bolt.calculateSchema();
+        bolt.calculateFields();
 
         // Make sure the capture succeeded.
-        verify(bolt).calculateSchema(captor.capture());
+        verify(bolt).calculateFields(captor.capture());
 
         // Make sure the capture is empty.
         List result = captor.getValue();
@@ -314,102 +311,111 @@ public final class AbstractBoltTest {
     }
 
     /**
-     * Pass a single schema into the bolt.
+     * Pass a single fields into the bolt.
      */
     @Test
     @SuppressWarnings("unchecked")
-    public void testCalculateSchema1() {
+    public void testCalculateFields1() {
         AbstractBolt bolt = mock(AbstractBolt.class);
 
         // Get our capture mechanism ready
         ArgumentCaptor<List> captor = ArgumentCaptor.forClass(List.class);
 
-        Map<String, String> schema = new HashMap<>();
-        schema.put("one", "string");
-        schema.put("two", "string");
+        List<String> schema = new ArrayList<>();
+        schema.add("one");
+        schema.add("two");
+        Fields fields = new Fields(schema);
 
         // Prepare the bolt
-        bolt.calculateSchema(schema);
+        bolt.calculateFields(fields);
 
         // Make sure the capture succeeded.
-        verify(bolt).calculateSchema(captor.capture());
+        verify(bolt).calculateFields(captor.capture());
 
         // Make sure the capture is empty.
         List result = captor.getValue();
-        Assert.assertEquals(schema, result.get(0));
+        Assert.assertEquals(fields, result.get(0));
     }
 
     /**
-     * Pass a list of schema into the bolt.
+     * Pass a list of fields into the bolt.
      */
     @Test
     @SuppressWarnings("unchecked")
-    public void testCalculateSchema2() {
+    public void testCalculateFields2() {
         AbstractBolt bolt = mock(AbstractBolt.class);
 
-        Map<String, String> schema = new HashMap<>();
-        schema.put("one", "string");
-        schema.put("two", "string");
+        List<String> schema = new ArrayList<>();
+        schema.add("one");
+        schema.add("two");
+        Fields fields = new Fields(schema);
 
-        List<Map<String, String>> schemaList = new ArrayList<>();
-        schemaList.add(schema);
+        List<Fields> fieldsList = new ArrayList<>();
+        fieldsList.add(fields);
 
         // Prepare the bolt
-        bolt.calculateSchema(schemaList);
+        bolt.calculateFields(fieldsList);
 
         // Make sure the capture succeeded.
-        verify(bolt).calculateSchema(schemaList);
+        verify(bolt).calculateFields(fieldsList);
     }
 
     /**
-     * Assert that the merge schema works.
+     * Assert that the merge fields works.
      */
     @Test
-    public void testMergeSchema() {
+    public void testMergeFields() {
         AbstractBolt bolt = mock(AbstractBolt.class,
                 Mockito.CALLS_REAL_METHODS);
 
-        Map<String, String> schema1 = new HashMap<>();
-        schema1.put("one", "string");
-        schema1.put("two", "string");
 
-        Map<String, String> schema2 = new HashMap<>();
-        schema2.put("three", "string");
-        schema2.put("four", "string");
+        List<String> schema1 = new ArrayList<>();
+        schema1.add("one");
+        schema1.add("two");
+        Fields fields1 = new Fields(schema1);
 
-        List<Map<String, String>> schemaList = new ArrayList<>();
-        schemaList.add(schema1);
-        schemaList.add(schema2);
+        List<String> schema2 = new ArrayList<>();
+        schema2.add("three");
+        schema2.add("four");
+        Fields fields2 = new Fields(schema2);
 
-        Map<String, String> result = bolt.mergeSchema(schemaList);
+        List<Fields> fieldsList = new ArrayList<>();
+        fieldsList.add(fields1);
+        fieldsList.add(fields2);
 
-        Assert.assertTrue(result.entrySet().containsAll(schema1.entrySet()));
-        Assert.assertTrue(result.entrySet().containsAll(schema2.entrySet()));
+        Fields result = bolt.mergeFields(fieldsList);
+
+        Assert.assertTrue(result.get(0).equals("one"));
+        Assert.assertTrue(result.get(1).equals("two"));
+        Assert.assertTrue(result.get(2).equals("three"));
+        Assert.assertTrue(result.get(3).equals("four"));
     }
 
     /**
-     * Assert that the overlap schema works.
+     * Assert that the overlap fields works.
      */
     @Test
-    public void testMergeOverlapSchema() {
+    public void testMergeOverlapFields() {
         AbstractBolt bolt = mock(AbstractBolt.class,
                 Mockito.CALLS_REAL_METHODS);
 
-        Map<String, String> schema1 = new HashMap<>();
-        schema1.put("two", "string");
+        List<String> schema1 = new ArrayList<>();
+        schema1.add("two");
+        Fields fields1 = new Fields(schema1);
 
-        Map<String, String> schema2 = new HashMap<>();
-        schema2.put("two", "integer");
-        schema2.put("four", "string");
+        List<String> schema2 = new ArrayList<>();
+        schema2.add("two");
+        schema2.add("four");
+        Fields fields2 = new Fields(schema2);
 
-        List<Map<String, String>> schemaList = new ArrayList<>();
-        schemaList.add(schema1);
-        schemaList.add(schema2);
+        List<Fields> fieldsList = new ArrayList<>();
+        fieldsList.add(fields1);
+        fieldsList.add(fields2);
 
-        Map<String, String> result = bolt.mergeSchema(schemaList);
+        Fields result = bolt.mergeFields(fieldsList);
 
-        Assert.assertFalse(result.entrySet().containsAll(schema1.entrySet()));
-        Assert.assertTrue(result.entrySet().containsAll(schema2.entrySet()));
+        Assert.assertTrue(result.get(0).equals("two"));
+        Assert.assertTrue(result.get(1).equals("four"));
     }
 
     /**
@@ -517,17 +523,14 @@ public final class AbstractBoltTest {
         }
 
         /**
-         * Calculate the schema.
+         * Calculate the fields.
          *
-         * @param parentSchema The parent schema from which to calculate this
+         * @param parentFields The parent fields from which to calculate this
          *                     one.
-         * @return The calculated schema.
          */
         @Override
-        public Map<String, String> calculateSchema(
-                final List<Map<String, String>> parentSchema
-        ) {
-            return mergeSchema(parentSchema);
+        public void calculateFields(final List<Fields> parentFields) {
+            setFields(mergeFields(parentFields));
         }
 
         /**

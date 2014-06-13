@@ -20,7 +20,8 @@ package io.dataplay.storm.workers;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
-import java.util.Map;
+
+import backtype.storm.tuple.Fields;
 
 /**
  * This is the base interface to which all spouts and bolts in our library must
@@ -45,10 +46,8 @@ public interface IDataWorker {
 
     /**
      * This method asks an instance to determine its emitted schema.
-     *
-     * @return A schema, calculated based on the present worker's configuration.
      */
-    Map<String, String> calculateSchema();
+    void calculateFields();
 
     /**
      * This method asks an instance to determine its EMITTED schema based on a
@@ -57,11 +56,8 @@ public interface IDataWorker {
      *
      * @param parentSchema A list of parent schemae, describing the format of
      *                     tuples which this worker should expect to receive.
-     * @return A schema, calculated based on the present worker's configuration
-     * and a list of input schema.
      */
-    Map<String, String> calculateSchema(
-            List<Map<String, String>> parentSchema);
+    void calculateFields(List<Fields> parentSchema);
 
     /**
      * This method asks an instance to determine its EMITTED schema based on a
@@ -70,23 +66,20 @@ public interface IDataWorker {
      *
      * @param parentSchema A single parent schema, describing the format of
      *                     tuples which this worker should expect to receive.
-     * @return A schema, calculated based on the present worker's configuration
-     * and a single input schema.
      */
-    Map<String, String> calculateSchema(
-            Map<String, String> parentSchema);
+    void calculateFields(Fields parentSchema);
 
     /**
-     * Get the schema.
+     * Get the fields schema.
      *
      * @return The current configured schema.
      */
-    Map<String, String> getSchema();
+    Fields getFields();
 
     /**
-     * Set the schema.
+     * Set the fields Schema.
      *
-     * @param schema A schema to set.
+     * @param fields A schema to set.
      */
-    void setSchema(Map<String, String> schema);
+    void setFields(Fields fields);
 }

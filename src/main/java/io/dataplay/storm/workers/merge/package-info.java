@@ -16,11 +16,10 @@
  */
 
 /**
- * This package contains all classes necessary for the logging bolt,
- * a simple implementation of a bolt which only logs the contents of tuples
- * that it receives.
+ * This package contains the merge bolt, a very simplistic bolt which combines
+ * two data streams and their schema.
  *
  * @author Michael Krotscheck
  */
 
-package io.dataplay.workers.logging;
+package io.dataplay.storm.workers.merge;

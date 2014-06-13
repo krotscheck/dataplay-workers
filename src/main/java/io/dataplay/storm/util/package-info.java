@@ -15,13 +15,11 @@
  * limitations under the License.
  */
 
-package io.dataplay;
-
 /**
- * A marker interface to distinguish integration tests in our suite.
+ * This package contains utility classes and other methods useful across the
+ * entire project.
  *
  * @author Michael Krotscheck
  */
-public interface IntegrationTest {
 
-}
+package io.dataplay.storm.util;

@@ -16,9 +16,9 @@
  */
 
 /**
- * Unit tests for io.dataplay.worker.*.
+ * Tests for io.dataplay.storm.util.*.
  *
  * @author Michael Krotscheck
  */
 
-package io.dataplay.workers;
+package io.dataplay.storm.util;

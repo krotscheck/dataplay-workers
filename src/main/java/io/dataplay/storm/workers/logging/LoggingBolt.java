@@ -15,15 +15,15 @@
  * limitations under the License.
  */
 
-package io.dataplay.workers.logging;
+package io.dataplay.storm.workers.logging;
 
-import io.dataplay.workers.AbstractBolt;
+import io.dataplay.storm.workers.AbstractBolt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
-import java.util.Map;
 
+import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 
 /**
@@ -58,15 +58,13 @@ public final class LoggingBolt extends AbstractBolt {
     }
 
     /**
-     * Calculate the schema emitted by this bolt.
+     * Calculate the fields emitted by this bolt.
      *
-     * @param parentSchema A list of parent schema.
-     * @return The merged schema.
+     * @param parentFields A list of parent fields.
      */
     @Override
-    public Map<String, String> calculateSchema(final List<Map<String, String>>
-                                                       parentSchema) {
-        return mergeSchema(parentSchema);
+    public void calculateFields(final List<Fields> parentFields) {
+        setFields(mergeFields(parentFields));
     }
 
     /**

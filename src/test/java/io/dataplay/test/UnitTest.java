@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package io.dataplay;
+package io.dataplay.test;
 
 /**
  * A marker interface to distinguish unit tests in our suite.

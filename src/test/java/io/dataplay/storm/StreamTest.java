@@ -17,7 +17,7 @@
 
 package io.dataplay.storm;
 
-import io.dataplay.UnitTest;
+import io.dataplay.test.UnitTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;

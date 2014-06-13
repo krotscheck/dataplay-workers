@@ -15,10 +15,13 @@
  * limitations under the License.
  */
 
+package io.dataplay.test;
+
 /**
- * Unit tests for io.dataplay.workers.logging.*.
+ * A marker interface to distinguish integration tests in our suite.
  *
  * @author Michael Krotscheck
  */
+public interface IntegrationTest {
 
-package io.dataplay.workers.logging;
+}

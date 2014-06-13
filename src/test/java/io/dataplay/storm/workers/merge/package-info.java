@@ -16,9 +16,9 @@
  */
 
 /**
- * Tests for io.dataplay.util.*.
+ * Unit tests for io.dataplay.storm.workers.merge.*.
  *
  * @author Michael Krotscheck
  */
 
-package io.dataplay.util;
+package io.dataplay.storm.workers.merge;

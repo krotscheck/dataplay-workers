@@ -4,7 +4,7 @@
 
     <groupId>io.dataplay.storm</groupId>
     <artifactId>workers</artifactId>
-    <version>0.1.5</version>
+    <version>0.1.6-SNAPSHOT</version>
     <name>Dataplay.io Storm Libraries</name>
     <description>
         This jar contains the aggregate storm utilities, bolts, and spouts for

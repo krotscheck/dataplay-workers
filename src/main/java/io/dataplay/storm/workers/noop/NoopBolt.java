@@ -1,0 +1,86 @@
+/*
+ * Copyright (c) 2014 Michael Krotscheck
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy
+ * of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package io.dataplay.storm.workers.noop;
+
+import io.dataplay.storm.workers.AbstractBolt;
+import io.dataplay.storm.workers.logging.LoggingBolt;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.List;
+
+import backtype.storm.tuple.Fields;
+import backtype.storm.tuple.Tuple;
+
+/**
+ * A No-op Bolt, useful for when we fail to detect which bolt to configure. It
+ * acts as a blind passthrough, much like the LoggerBolt.
+ *
+ * @author Michael Krotscheck
+ */
+public final class NoopBolt extends AbstractBolt {
+
+    /**
+     * Logger instance.
+     */
+    private Logger logger = LoggerFactory.getLogger(LoggingBolt.class);
+
+    /**
+     * Calculate the fields emitted by this bolt.
+     *
+     * @param parentFields A list of parent fields.
+     */
+    @Override
+    public void calculateFields(final List<Fields> parentFields) {
+        setFields(mergeFields(parentFields));
+    }
+
+    /**
+     * Logs the content of a tuple, then sends it on.
+     *
+     * @param tuple The tuple to log.
+     */
+    @Override
+    protected void process(final Tuple tuple) {
+        // Log the tuple.
+        logger.info(tuple.toString());
+
+        // Emit the tuple.
+        emit(tuple, tuple.getValues());
+    }
+
+
+    /**
+     * Logs a tick tuple.
+     */
+    @Override
+    protected void tick() {
+        // Log that a tick was received.
+        logger.info("Tick");
+    }
+
+    /**
+     * Returns whether this bolt's configuration is valid.
+     *
+     * @return True, the configuration is always valid.
+     */
+    @Override
+    public Boolean isValid() {
+        return true;
+    }
+}
